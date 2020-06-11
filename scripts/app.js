@@ -1,15 +1,18 @@
 const body = document.querySelector("body");
 const hangmanContainer = document.createElement("div");
 const guessCounter = document.createElement("p");
-const puzzle = document.createElement("p");
+const puzzleDiv = document.createElement("div");
 const resetButton = document.createElement("button");
+
+puzzleDiv.className = "puzzle";
+resetButton.className = "button";
 
 let game1;
 
 resetButton.textContent = "Reset";
 
+hangmanContainer.appendChild(puzzleDiv);
 hangmanContainer.appendChild(guessCounter);
-hangmanContainer.appendChild(puzzle);
 hangmanContainer.appendChild(resetButton);
 body.appendChild(hangmanContainer);
 window.addEventListener("keypress", (e) => {
@@ -22,8 +25,14 @@ window.addEventListener("keypress", (e) => {
 });
 
 const renderElements = () => {
-  guessCounter.textContent = game1.puzzle;
-  puzzle.textContent = game1.statusMessage;
+  guessCounter.textContent = game1.statusMessage;
+  puzzleDiv.innerHTML = "";
+
+  game1.puzzle.split("").forEach((letter) => {
+    const spanPuzzle = document.createElement("span");
+    spanPuzzle.textContent = letter;
+    puzzleDiv.appendChild(spanPuzzle);
+  });
 };
 
 const startGame = async () => {

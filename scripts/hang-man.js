@@ -27,6 +27,7 @@ class Hangman {
       return "Great work! You guessed the word.";
     }
   }
+
   get puzzle() {
     let puzzle = "";
 
